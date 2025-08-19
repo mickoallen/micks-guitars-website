@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Mick's Custom Guitars</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="Mick's Guitars" style="height: 60px;">
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#gallery" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="shop.html" class="nav-link active">Shop</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Hero Section -->
+    <section class="shop-hero">
+        <div class="container">
+            <div class="shop-hero-content">
+                <h1>Available Guitars</h1>
+                <p>Handcrafted instruments ready for their new home</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Filters -->
+    <section class="shop-filters">
+        <div class="container">
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="category-filter">Category:</label>
+                    <select id="category-filter">
+                        <option value="all">All Guitars</option>
+                        <option value="acoustic">Acoustic</option>
+                        <option value="electric">Electric</option>
+                        <option value="bass">Bass</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-filter">Price Range:</label>
+                    <select id="price-filter">
+                        <option value="all">All Prices</option>
+                        <option value="under-2000">Under $2,000</option>
+                        <option value="2000-4000">$2,000 - $4,000</option>
+                        <option value="over-4000">Over $4,000</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort-filter">Sort By:</label>
+                    <select id="sort-filter">
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name: A to Z</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Products -->
+    <section class="shop-products">
+        <div class="container">
+            <div class="products-grid" id="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card" data-category="acoustic" data-price="3500">
+                    <div class="product-image">
+                        <i class="fas fa-guitar"></i>
+                        <div class="product-badge">Available</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Classic Dreadnought Acoustic</h3>
+                        <p class="product-description">Traditional dreadnought with rich, warm tones. Perfect for folk, country, and bluegrass.</p>
+                        <div class="product-specs">
+                            <span>Solid Spruce Top</span>
+                            <span>Mahogany Back & Sides</span>
+                            <span>Rosewood Fingerboard</span>
+                        </div>
+                        <div class="product-price">$3,500</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary" onclick="viewProduct('dreadnought')">View Details</button>
+                            <button class="btn btn-secondary" onclick="inquireProduct('dreadnought')">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card" data-category="electric" data-price="4200">
+                    <div class="product-image">
+                        <i class="fas fa-guitar"></i>
+                        <div class="product-badge">Available</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Custom Electric Guitar</h3>
+                        <p class="product-description">Modern electric with versatile pickups and sleek design. Ideal for rock, blues, and jazz.</p>
+                        <div class="product-specs">
+                            <span>Mahogany Body</span>
+                            <span>Maple Neck</span>
+                            <span>Humbucker Pickups</span>
+                        </div>
+                        <div class="product-price">$4,200</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary" onclick="viewProduct('electric')">View Details</button>
+                            <button class="btn btn-secondary" onclick="inquireProduct('electric')">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card" data-category="acoustic" data-price="2800">
+                    <div class="product-image">
+                        <i class="fas fa-guitar"></i>
+                        <div class="product-badge">Available</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Parlor Acoustic</h3>
+                        <p class="product-description">Compact parlor guitar with sweet, intimate tones. Perfect for fingerpicking and small venues.</p>
+                        <div class="product-specs">
+                            <span>Cedar Top</span>
+                            <span>Walnut Back & Sides</span>
+                            <span>Mahogany Neck</span>
+                        </div>
+                        <div class="product-price">$2,800</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary" onclick="viewProduct('parlor')">View Details</button>
+                            <button class="btn btn-secondary" onclick="inquireProduct('parlor')">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card" data-category="electric" data-price="3800">
+                    <div class="product-image">
+                        <i class="fas fa-guitar"></i>
+                        <div class="product-badge">Available</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Jazz Archtop</h3>
+                        <p class="product-description">Sophisticated archtop with warm, mellow tones. Designed for jazz and blues players.</p>
+                        <div class="product-specs">
+                            <span>Arched Spruce Top</span>
+                            <span>Maple Back & Sides</span>
+                            <span>Floating Pickup</span>
+                        </div>
+                        <div class="product-price">$3,800</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary" onclick="viewProduct('archtop')">View Details</button>
+                            <button class="btn btn-secondary" onclick="inquireProduct('archtop')">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card" data-category="bass" data-price="3200">
+                    <div class="product-image">
+                        <i class="fas fa-guitar"></i>
+                        <div class="product-badge">Available</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Custom Bass Guitar</h3>
+                        <p class="product-description">Versatile bass with deep, punchy tones. Great for studio work and live performance.</p>
+                        <div class="product-specs">
+                            <span>Alder Body</span>
+                            <span>Maple Neck</span>
+                            <span>Active Electronics</span>
+                        </div>
+                        <div class="product-price">$3,200</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary" onclick="viewProduct('bass')">View Details</button>
+                            <button class="btn btn-secondary" onclick="inquireProduct('bass')">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card" data-category="acoustic" data-price="4500">
+                    <div class="product-image">
+                        <i class="fas fa-guitar"></i>
+                        <div class="product-badge">Available</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>12-String Acoustic</h3>
+                        <p class="product-description">Rich, full-bodied 12-string with shimmering harmonics. Perfect for folk and rock.</p>
+                        <div class="product-specs">
+                            <span>Sitka Spruce Top</span>
+                            <span>Rosewood Back & Sides</span>
+                            <span>12-String Bridge</span>
+                        </div>
+                        <div class="product-price">$4,500</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary" onclick="viewProduct('12string')">View Details</button>
+                            <button class="btn btn-secondary" onclick="inquireProduct('12string')">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-content">
+                <!-- Modal content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Inquiry Form Modal -->
+    <div id="inquiry-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="inquiry-form">
+                <h2>Inquire About Guitar</h2>
+                <form id="inquiryForm">
+                    <div class="form-group">
+                        <label for="inquiry-name">Name *</label>
+                        <input type="text" id="inquiry-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-email">Email *</label>
+                        <input type="email" id="inquiry-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-phone">Phone</label>
+                        <input type="tel" id="inquiry-phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-guitar">Guitar Model</label>
+                        <input type="text" id="inquiry-guitar" name="guitar" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-message">Message *</label>
+                        <textarea id="inquiry-message" name="message" rows="5" placeholder="Tell us about your interest in this guitar..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mick's Guitars</h3>
+                    <p>Handcrafted excellence in every instrument.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#guitars">Guitars</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mick's Guitars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="shop.js"></script>
+</body>
+</html> 
