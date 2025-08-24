@@ -1139,6 +1139,54 @@ p {
     margin-top: 3rem;
 }
 
+/* Mobile Responsive Pricing */
+@media (max-width: 768px) {
+    .pricing-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .pricing-text {
+        text-align: center;
+    }
+    
+    .pricing-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .pricing-text p {
+        font-size: 1rem;
+    }
+    
+    .pricing-breakdown {
+        gap: 1rem;
+    }
+    
+    .pricing-item {
+        padding: 1rem;
+        gap: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .pricing-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .pricing-details h4 {
+        font-size: 1.1rem;
+    }
+    
+    .price {
+        font-size: 1.3rem;
+    }
+    
+    .pricing-details p {
+        font-size: 0.85rem;
+    }
+}
+
 .pricing-cta p {
     font-size: 1.1rem;
     color: #666;
