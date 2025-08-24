@@ -1,16 +1,8 @@
-// Dynamic Gallery Carousel
+// Dynamic Gallery Grid
 document.addEventListener('DOMContentLoaded', function() {
-    const galleryContainer = document.getElementById('dynamic-gallery');
-    const slidesContainer = document.getElementById('gallery-slides');
-    const prevButton = document.getElementById('gallery-prev');
-    const nextButton = document.getElementById('gallery-next');
-    const counter = document.getElementById('gallery-counter');
-    const dotsContainer = document.getElementById('gallery-dots');
+    const galleryContainer = document.getElementById('gallery-grid');
     
     if (!galleryContainer) return;
-    
-    let currentSlide = 0;
-    let totalSlides = 0;
     
     // EASY TO UPDATE: Just add new image filenames to this array
     // The gallery will automatically load all images listed here
@@ -44,11 +36,14 @@ document.addEventListener('DOMContentLoaded', function() {
         '20220405_124214.jpg'
     ];
     
-    // Create gallery slides for each image
-    imageFiles.forEach((filename, index) => {
-        const slide = document.createElement('div');
-        slide.className = 'gallery-slide';
-        slide.setAttribute('data-index', index);
+    // Use only guitar images for the gallery
+    const allImages = imageFiles;
+    
+    // Create gallery items for each image
+    allImages.forEach((filename, index) => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.setAttribute('data-index', index);
         
         const img = document.createElement('img');
         img.src = `images/guitars/optimized/${filename}`;
@@ -60,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         watermark.className = 'gallery-watermark';
         watermark.innerHTML = '<img src="images/micks-guitars-headstock-logo-png.png" alt="Mick\'s Guitars">';
         
-        slide.appendChild(img);
-        slide.appendChild(watermark);
+        item.appendChild(img);
+        item.appendChild(watermark);
         
         // Add loading animation
         img.onload = function() {
@@ -71,122 +66,72 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add error handling for missing images
         img.onerror = function() {
             console.log(`Image not found: ${filename}`);
-            slide.style.display = 'none';
+            item.style.display = 'none';
         };
         
-        slide.appendChild(img);
-        slidesContainer.appendChild(slide);
+        galleryContainer.appendChild(item);
     });
     
-    totalSlides = imageFiles.length;
-    
-    // Create navigation dots
-    for (let i = 0; i < totalSlides; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'gallery-dot';
-        dot.setAttribute('data-index', i);
-        dot.addEventListener('click', () => goToSlide(i));
-        dotsContainer.appendChild(dot);
-    }
-    
-    // Navigation functions
-    function goToSlide(index) {
-        if (index < 0) index = totalSlides - 1;
-        if (index >= totalSlides) index = 0;
-        
-        currentSlide = index;
-        updateCarousel();
-    }
-    
-    function nextSlide() {
-        goToSlide(currentSlide + 1);
-    }
-    
-    function prevSlide() {
-        goToSlide(currentSlide - 1);
-    }
-    
-    function updateCarousel() {
-        // Add fade effect during transition
-        slidesContainer.style.opacity = '0.7';
-        
-        // Update slide position with smooth transition
-        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-        
-        // Update counter
-        counter.textContent = `${currentSlide + 1} / ${totalSlides}`;
-        
-        // Update dots with animation
-        const dots = dotsContainer.querySelectorAll('.gallery-dot');
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
-        });
-        
-        // Update slide active states
-        const slides = slidesContainer.querySelectorAll('.gallery-slide');
-        slides.forEach((slide, index) => {
-            slide.classList.toggle('active', index === currentSlide);
-        });
-        
-
-        
-        // Fade back in after transition
-        setTimeout(() => {
-            slidesContainer.style.opacity = '1';
-        }, 300);
-    }
-    
-    // Event listeners
-    prevButton.addEventListener('click', prevSlide);
-    nextButton.addEventListener('click', nextSlide);
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') {
-            prevSlide();
-        } else if (e.key === 'ArrowRight') {
-            nextSlide();
-        }
-    });
-    
-    // Touch/swipe support for mobile
-    let startX = 0;
-    let endX = 0;
-    
-    slidesContainer.addEventListener('touchstart', function(e) {
-        startX = e.touches[0].clientX;
-    });
-    
-    slidesContainer.addEventListener('touchend', function(e) {
-        endX = e.changedTouches[0].clientX;
-        handleSwipe();
-    });
-    
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = startX - endX;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                nextSlide(); // Swipe left
-            } else {
-                prevSlide(); // Swipe right
-            }
-        }
-    }
-    
-    // Initialize carousel
-    updateCarousel();
-    
-    // Set initial active state
-    const firstSlide = slidesContainer.querySelector('.gallery-slide');
-    if (firstSlide) {
-        firstSlide.classList.add('active');
-    }
-    
-    // Auto-advance slides (optional - can be disabled)
-    // setInterval(nextSlide, 5000);
+    // Add click functionality for gallery images
+    addImageClickHandlers();
 });
+
+// Function to add click handlers to all gallery and workshop images
+function addImageClickHandlers() {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalClose = document.getElementById('modalClose');
+    
+    // Add click handlers to gallery items
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+        img.addEventListener('click', function(e) {
+            e.stopPropagation();
+            openModal(this.src);
+        });
+    });
+    
+    // Add click handlers to workshop items
+    document.querySelectorAll('.workshop-item img').forEach(img => {
+        img.addEventListener('click', function(e) {
+            e.stopPropagation();
+            openModal(this.src);
+        });
+    });
+    
+    // Close modal when clicking close button
+    modalClose.addEventListener('click', closeModal);
+    
+    // Close modal when clicking overlay
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
+
+// Function to open modal
+function openModal(imageSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    
+    modalImage.src = imageSrc;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+// Function to close modal
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
 
 // Function to refresh gallery (can be called when new images are added)
 function refreshGallery() {

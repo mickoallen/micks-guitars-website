@@ -43,14 +43,13 @@ window.addEventListener('scroll', () => {
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
         // Get form data
         const formData = new FormData(this);
         const data = Object.fromEntries(formData);
         
         // Basic validation
-        if (!data.name || !data.email || !data.service || !data.message) {
+        if (!data.name || !data.email || !data.message) {
+            e.preventDefault();
             showNotification('Please fill in all required fields.', 'error');
             return;
         }
@@ -58,16 +57,13 @@ if (contactForm) {
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(data.email)) {
+            e.preventDefault();
             showNotification('Please enter a valid email address.', 'error');
             return;
         }
         
-        // Simulate form submission
+        // Show success message after form submits
         showNotification('Thank you for your message! We\'ll get back to you soon.', 'success');
-        this.reset();
-        
-        // In a real application, you would send this data to your server
-        console.log('Form submitted:', data);
     });
 }
 
