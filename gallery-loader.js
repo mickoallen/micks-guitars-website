@@ -76,25 +76,48 @@ document.addEventListener('DOMContentLoaded', function() {
     addImageClickHandlers();
 });
 
+// Global variables for navigation
+let allImages = [];
+let currentImageIndex = 0;
+
 // Function to add click handlers to all gallery and workshop images
 function addImageClickHandlers() {
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     const modalClose = document.getElementById('modalClose');
     
+    // Collect all clickable images (excluding watermarks)
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+    const workshopImages = document.querySelectorAll('.workshop-item img');
+    
+    // Filter out watermark images (they have 'micks-guitars-headstock-logo-png.png' in their src)
+    allImages = [...galleryImages, ...workshopImages].filter(img => 
+        !img.src.includes('micks-guitars-headstock-logo-png.png')
+    );
+    
     // Add click handlers to gallery items
-    document.querySelectorAll('.gallery-item img').forEach(img => {
+    galleryImages.forEach((img, index) => {
         img.addEventListener('click', function(e) {
             e.stopPropagation();
+            currentImageIndex = allImages.indexOf(img);
             openModal(this.src);
         });
     });
     
     // Add click handlers to workshop items
-    document.querySelectorAll('.workshop-item img').forEach(img => {
+    workshopImages.forEach((img, index) => {
         img.addEventListener('click', function(e) {
             e.stopPropagation();
+            currentImageIndex = allImages.indexOf(img);
             openModal(this.src);
+        });
+    });
+    
+    // Prevent watermark clicks from opening modal
+    document.querySelectorAll('.gallery-watermark, .workshop-watermark').forEach(watermark => {
+        watermark.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
         });
     });
     
@@ -108,12 +131,47 @@ function addImageClickHandlers() {
         }
     });
     
-    // Close modal with Escape key
+    // Keyboard navigation and back button
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
+        if (!modal.classList.contains('active')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeModal();
+                break;
+            case 'ArrowLeft':
+                navigateImage(-1);
+                break;
+            case 'ArrowRight':
+                navigateImage(1);
+                break;
+        }
+    });
+    
+    // Handle browser back button
+    window.addEventListener('popstate', function(e) {
+        if (modal.classList.contains('active')) {
             closeModal();
         }
     });
+}
+
+// Function to navigate between images
+function navigateImage(direction) {
+    const newIndex = currentImageIndex + direction;
+    
+    // Handle wrapping around
+    if (newIndex < 0) {
+        currentImageIndex = allImages.length - 1;
+    } else if (newIndex >= allImages.length) {
+        currentImageIndex = 0;
+    } else {
+        currentImageIndex = newIndex;
+    }
+    
+    // Update modal image
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = allImages[currentImageIndex].src;
 }
 
 // Function to open modal
@@ -124,6 +182,9 @@ function openModal(imageSrc) {
     modalImage.src = imageSrc;
     modal.classList.add('active');
     document.body.style.overflow = 'hidden'; // Prevent scrolling
+    
+    // Add to browser history
+    history.pushState({ modal: true }, '', '#image');
 }
 
 // Function to close modal
@@ -131,6 +192,11 @@ function closeModal() {
     const modal = document.getElementById('imageModal');
     modal.classList.remove('active');
     document.body.style.overflow = ''; // Restore scrolling
+    
+    // Remove from browser history if we added it
+    if (history.state && history.state.modal) {
+        history.back();
+    }
 }
 
 // Function to refresh gallery (can be called when new images are added)
