@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Store - Mick's Guitars | Handcrafted Electric Guitars for Sale</title>
+    <meta name="title" content="Store - Mick's Guitars | Handcrafted Electric Guitars for Sale">
+    <meta name="description" content="Browse available handcrafted electric guitars by Mick. Each guitar is unique, built by hand with premium materials. Contact for pricing and availability.">
+    <meta name="keywords" content="electric guitars for sale, custom guitars, handcrafted guitars, guitar store, Ontario guitar maker, custom guitar builder">
+    <meta name="author" content="Mick's Guitars">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://micksguitars.com/store">
+    <meta property="og:title" content="Store - Mick's Guitars">
+    <meta property="og:description" content="Browse available handcrafted electric guitars by Mick. Each guitar is unique, built by hand with premium materials.">
+    <meta property="og:image" content="https://micksguitars.com/images/guitars/PXL_20250118_194629026~2.jpg">
+    <meta property="og:site_name" content="Mick's Custom Guitars">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://micksguitars.com/store">
+    <meta property="twitter:title" content="Store - Mick's Guitars">
+    <meta property="twitter:description" content="Browse available handcrafted electric guitars by Mick. Each guitar is unique, built by hand with premium materials.">
+    <meta property="twitter:image" content="https://micksguitars.com/images/guitars/PXL_20250118_194629026~2.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/micks-guitars-headstock-logo-png.png">
+    <link rel="apple-touch-icon" href="images/micks-guitars-headstock-logo-png.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Store-specific styles -->
+    <style>
+        .store-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            margin-top: 80px; /* Add top margin to account for fixed navbar */
+        }
+        
+        .store-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .store-header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .store-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .guitars-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .guitar-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .guitar-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .guitar-images {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .gallery-thumb {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        
+        .gallery-thumb:hover,
+        .gallery-thumb.active {
+            border-color: #007bff;
+        }
+        
+        .guitar-details {
+            padding: 1.5rem;
+        }
+        
+        .guitar-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .guitar-price {
+            font-size: 1.1rem;
+            color: #007bff;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .guitar-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .guitar-specs {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+        
+        .guitar-specs strong {
+            color: #555;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .guitar-specs ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .guitar-specs li {
+            padding: 0.2rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .guitar-specs li:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            background: #0056b3;
+        }
+        
+        .no-guitars {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        
+        .no-guitars h3 {
+            margin-bottom: 1rem;
+        }
+        
+        /* Fullscreen Image Viewer */
+        .fullscreen-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .fullscreen-viewer.active {
+            display: flex;
+        }
+        
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .fullscreen-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fullscreen-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .fullscreen-nav.prev {
+            left: 20px;
+        }
+        
+        .fullscreen-nav.next {
+            right: 20px;
+        }
+        
+        .fullscreen-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+        
+        .fullscreen-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .fullscreen-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .guitars-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .store-container {
+                padding: 1rem;
+            }
+            
+            .store-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/micks-guitars-headstock-logo-png.png" alt="Mick's Guitars" style="height: 60px;">
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#gallery" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Store Section -->
+    <section class="store" role="main">
+        <div class="store-container">
+            <div class="store-header">
+                <h1>Available Guitars</h1>
+                <p>Browse the handcrafted guitars currently available. Each instrument is unique and built with care. Contact me for pricing and availability.</p>
+            </div>
+            
+            <div class="guitars-grid" id="guitarsGrid">
+                <!-- Guitar items will be populated by JavaScript -->
+            </div>
+            
+            <div class="no-guitars" id="noGuitars" style="display: none;">
+                <h3>No guitars currently available</h3>
+                <p>I'm currently working on new instruments. Check back soon or <a href="index.html#contact">contact me</a> to discuss a custom build.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mick's Guitars</h3>
+                    <p>Handcrafted electric guitars built with passion in Ontario, Canada.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: mick@micksguitars.com</p>
+                    <p>Location: Ontario, Canada</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/micksguitars/" target="_blank" rel="noopener">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@micksguitarsarecool" target="_blank" rel="noopener">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mick's Guitars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fullscreen Image Viewer -->
+    <div class="fullscreen-viewer" id="fullscreenViewer">
+        <button class="fullscreen-close" onclick="closeFullscreen()">×</button>
+        <button class="fullscreen-nav prev" onclick="navigateImage(-1)">‹</button>
+        <button class="fullscreen-nav next" onclick="navigateImage(1)">›</button>
+        <img class="fullscreen-image" id="fullscreenImage" src="" alt="">
+        <div class="fullscreen-counter" id="fullscreenCounter"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+                // Global variables for fullscreen viewer
+        let currentGuitarId = null;
+        let currentImageIndex = 0;
+        let currentGuitarGallery = [];
+        let guitars = []; // Global guitars array
+
+        // Store page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // ========================================
+            // GUITAR INVENTORY - EASY TO MANAGE
+            // ========================================
+            // To add a guitar: Copy a guitar object below and modify the details
+            // To remove a guitar: Delete or comment out the entire guitar object
+            // To reorder: Move guitar objects up or down in the array
+            guitars = [
+            {
+                id: 1,
+                title: "Custom Telecaster",
+                price: "$2,500 USD",
+                mainImage: "images/guitars/PXL_20250118_194629026~2.jpg",
+                gallery: [
+                    "images/guitars/PXL_20250118_194629026~2.jpg",
+                    "images/workshop/8IhZzchKv0c_753s.png",
+                    "images/workshop/gUKhw7LVTts_76s.png"
+                ],
+                description: "A handcrafted Telecaster-style guitar with premium tonewoods and custom electronics. This guitar features a solid mahogany body with a maple neck and rosewood fingerboard.",
+                specs: [
+                    "Body: Mahogany",
+                    "Neck: Maple",
+                    "Fingerboard: Rosewood",
+                    "Pickups: Custom wound",
+                    "Bridge: Vintage-style"
+                ]
+            },
+            {
+                id: 2,
+                title: "Stratocaster Build",
+                price: "$2,800 USD",
+                mainImage: "images/workshop/8IhZzchKv0c_753s.png",
+                gallery: [
+                    "images/workshop/8IhZzchKv0c_753s.png",
+                    "images/workshop/gUKhw7LVTts_76s.png",
+                    "images/workshop/gUKhw7LVTts_344s.png"
+                ],
+                description: "A custom Stratocaster with unique body contours and hand-wound pickups. This guitar offers classic Strat tones with modern playability.",
+                specs: [
+                    "Body: Alder",
+                    "Neck: Maple", 
+                    "Fingerboard: Maple",
+                    "Pickups: Hand-wound",
+                    "Bridge: 2-point tremolo"
+                ]
+            }
+            // ========================================
+            // TO ADD A NEW GUITAR:
+            // 1. Copy this template and paste it above this comment
+            // 2. Update the id (use the next number in sequence)
+            // 3. Fill in your guitar details
+            // 4. Add your image paths
+            // ========================================
+            /*
+            {
+                id: 3,
+                title: "Your Guitar Name",
+                price: "$X,XXX USD",
+                mainImage: "images/your-guitar/main-photo.jpg",
+                gallery: [
+                    "images/your-guitar/main-photo.jpg",
+                    "images/your-guitar/photo2.jpg",
+                    "images/your-guitar/photo3.jpg"
+                ],
+                description: "Describe your guitar here. What makes it special? What kind of music is it good for?",
+                specs: [
+                    "Body: [Wood Type]",
+                    "Neck: [Wood Type]",
+                    "Fingerboard: [Wood Type]",
+                    "Pickups: [Type/Brand]",
+                    "Bridge: [Type]",
+                    "Controls: [Description]",
+                    "Finish: [Type/Color]"
+                ]
+            }
+            */
+        ];
+
+            const guitarsGrid = document.getElementById('guitarsGrid');
+            const noGuitars = document.getElementById('noGuitars');
+
+            if (guitars.length === 0) {
+                noGuitars.style.display = 'block';
+            } else {
+                guitars.forEach(guitar => {
+                    const guitarElement = createGuitarElement(guitar);
+                    guitarsGrid.appendChild(guitarElement);
+                });
+            }
+
+            function createGuitarElement(guitar) {
+                const guitarDiv = document.createElement('div');
+                guitarDiv.className = 'guitar-item';
+                guitarDiv.dataset.guitarId = guitar.id;
+                
+                const galleryHTML = guitar.gallery.map((img, index) => 
+                    `<img src="${img}" alt="Gallery image ${index + 1}" class="gallery-thumb ${index === 0 ? 'active' : ''}" onclick="changeMainImage(this, '${img}', this.parentElement.parentElement)">`
+                ).join('');
+
+                // Convert specs array to HTML list
+                const specsHTML = guitar.specs.map(spec => `<li>${spec}</li>`).join('');
+                
+                guitarDiv.innerHTML = `
+                    <div class="guitar-images">
+                        <img src="${guitar.mainImage}" alt="${guitar.title}" class="main-image" style="cursor: pointer;">
+                        <div class="gallery-container">
+                            ${galleryHTML}
+                        </div>
+                    </div>
+                    <div class="guitar-details">
+                        <h3 class="guitar-title">${guitar.title}</h3>
+                        <div class="guitar-price">${guitar.price}</div>
+                        <p class="guitar-description">${guitar.description}</p>
+                        <div class="guitar-specs">
+                            <strong>Specifications:</strong>
+                            <ul>
+                                ${specsHTML}
+                            </ul>
+                        </div>
+                        <a href="index.html#contact" class="contact-btn">Inquire About This Guitar</a>
+                    </div>
+                `;
+
+                // Add click handler to main image for fullscreen
+                const mainImage = guitarDiv.querySelector('.main-image');
+                mainImage._fullscreenHandler = () => openFullscreen(guitar.id, guitar.mainImage, guitar.gallery.length, 0);
+                mainImage.addEventListener('click', mainImage._fullscreenHandler);
+
+                return guitarDiv;
+            }
+        });
+
+        // Function to change main image when gallery thumb is clicked
+        function changeMainImage(thumbElement, newImageSrc, guitarContainer) {
+            // Update main image
+            const mainImage = guitarContainer.querySelector('.main-image');
+            mainImage.src = newImageSrc;
+            
+            // Update active state of gallery thumbs
+            const allThumbs = guitarContainer.querySelectorAll('.gallery-thumb');
+            allThumbs.forEach(thumb => thumb.classList.remove('active'));
+            thumbElement.classList.add('active');
+            
+            // Update click handler for fullscreen
+            const guitarId = guitarContainer.closest('.guitar-item').dataset.guitarId;
+            const gallery = guitars.find(g => g.id == guitarId).gallery;
+            const imageIndex = gallery.indexOf(newImageSrc);
+            
+            // Remove old click handler and add new one
+            mainImage.removeEventListener('click', mainImage._fullscreenHandler);
+            mainImage._fullscreenHandler = () => openFullscreen(guitarId, newImageSrc, gallery.length, imageIndex);
+            mainImage.addEventListener('click', mainImage._fullscreenHandler);
+        }
+
+        // Function to open fullscreen viewer
+        function openFullscreen(guitarId, imageSrc, totalImages, imageIndex = 0) {
+            currentGuitarId = guitarId;
+            currentImageIndex = imageIndex;
+            currentGuitarGallery = guitars.find(g => g.id == guitarId).gallery;
+            
+            const viewer = document.getElementById('fullscreenViewer');
+            const image = document.getElementById('fullscreenImage');
+            const counter = document.getElementById('fullscreenCounter');
+            
+            image.src = imageSrc;
+            image.alt = `Guitar image ${imageIndex + 1}`;
+            counter.textContent = `${imageIndex + 1} / ${totalImages}`;
+            
+            viewer.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Function to close fullscreen viewer
+        function closeFullscreen() {
+            const viewer = document.getElementById('fullscreenViewer');
+            viewer.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Function to navigate between images
+        function navigateImage(direction) {
+            if (!currentGuitarGallery.length) return;
+            
+            currentImageIndex += direction;
+            
+            // Loop around
+            if (currentImageIndex < 0) {
+                currentImageIndex = currentGuitarGallery.length - 1;
+            } else if (currentImageIndex >= currentGuitarGallery.length) {
+                currentImageIndex = 0;
+            }
+            
+            const newImageSrc = currentGuitarGallery[currentImageIndex];
+            const image = document.getElementById('fullscreenImage');
+            const counter = document.getElementById('fullscreenCounter');
+            
+            image.src = newImageSrc;
+            image.alt = `Guitar image ${currentImageIndex + 1}`;
+            counter.textContent = `${currentImageIndex + 1} / ${currentGuitarGallery.length}`;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const viewer = document.getElementById('fullscreenViewer');
+            if (!viewer.classList.contains('active')) return;
+            
+            switch(e.key) {
+                case 'Escape':
+                    closeFullscreen();
+                    break;
+                case 'ArrowLeft':
+                    navigateImage(-1);
+                    break;
+                case 'ArrowRight':
+                    navigateImage(1);
+                    break;
+            }
+        });
+
+        // Click outside image to close
+        document.getElementById('fullscreenViewer').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeFullscreen();
+            }
+        });
+    </script>
+</body>
+</html> 

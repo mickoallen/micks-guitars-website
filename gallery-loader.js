@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // The gallery will automatically load all images listed here
     const imageFiles = [
         // 2025 Images
+        'PXL_20250923_181808842.jpg',
+        'PXL_20250923_181822971-EDIT.jpg',
+        'PXL_20250923_181934277-EDIT.jpg',
         'PXL_20250118_193838287~2.jpg',
         'PXL_20250118_193857351~2.jpg',
         'PXL_20250118_194039272~2.jpg',
